@@ -1,0 +1,10 @@
+# files
+db.sqlite3
+DjangoDemo.code-workspace
+
+# dirs
+.DS_Store
+__pycache__
+
+# file types
+*.pyc
