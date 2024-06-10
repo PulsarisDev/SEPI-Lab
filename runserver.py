@@ -8,6 +8,8 @@ if user_input == 'run':
     os.system("python manage.py runserver")
 elif user_input == 'test':
     os.system("python manage.py test")
+elif user_input == 'unit':
+    os.system("python manage.py test lists")
 elif user_input == 'func':
     os.system("python manage.py test functional_tests")
 else:
