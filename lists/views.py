@@ -5,13 +5,9 @@ from lists.models import Item
 def home_page(request: HttpRequest):
     if request.method == 'POST':
         Item.objects.create(text = request.POST['item_text'])
-        return redirect('/')
-    
+        return redirect('/lists/the-new-page/')
+    return render(request, 'home.html')
+
+def view_list(request: HttpRequest):
     items = Item.objects.all()
-    return render(
-        request,
-        'home.html',
-        {
-            'items': items
-        }
-    )
+    return render(request, 'list.html', {'items': items})
