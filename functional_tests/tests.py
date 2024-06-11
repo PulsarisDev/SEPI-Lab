@@ -1,4 +1,4 @@
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
 
 from selenium import webdriver
@@ -10,7 +10,7 @@ from selenium.common.exceptions import WebDriverException
 
 MAX_WAIT = 10
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self) -> None:
         self.service = Service('msedgedriver')
         self.service.start()
@@ -97,7 +97,7 @@ class NewVisitorTest(LiveServerTestCase):
         input_box = self.driver.find_element(By.ID, 'id_new_item')
         self.assertAlmostEqual(
             input_box.location['x'] + input_box.size['width'] / 2,
-            512,
+            488,  # 由于使用了Edge而非Chrome，浏览器会占用一定的页面宽度导致windows_size!=document_size，下同。
             delta = 10
         )
 
@@ -108,6 +108,6 @@ class NewVisitorTest(LiveServerTestCase):
         input_box = self.driver.find_element(By.ID, 'id_new_item')
         self.assertAlmostEqual(
             input_box.location['x'] + input_box.size['width'] / 2,
-            512,
+            488,
             delta = 10
         )
