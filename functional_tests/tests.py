@@ -1,5 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
+import os
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -14,6 +15,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self) -> None:
         self.service = Service('msedgedriver')
         self.service.start()
+        real_server = os.environ.get('REAL_SERVER')
+        if real_server:
+            self.live_server_url = 'http://' + real_server
         self.driver = webdriver.Remote(self.service.service_url)
         return super().setUp()
     
